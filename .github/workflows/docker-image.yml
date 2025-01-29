@@ -7,17 +7,13 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - name: Hacer checkout
-    - uses: actions/checkout@v4
+      - name: Hacer checkout
+        uses: actions/checkout@v4
 
-    - name: Loguearse en docker
-      run:  |
-        echo "Logueandose... "
-        docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_TOKEN}}
-        
+      - name: Loguearse en docker
+        run: |
+          echo "Logueandose..."
+          docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
