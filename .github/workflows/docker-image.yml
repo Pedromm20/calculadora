@@ -17,3 +17,7 @@ jobs:
         run: |
           echo "Logueandose..."
           docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+      - name: Construyendo la imagen
+        run: docker build -t pedromm04/calculadora:latest . 
+      - name: Subiendo imagen
+        run: docker push pedromm04/calculadora:latest
