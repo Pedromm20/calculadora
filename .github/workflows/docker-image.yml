@@ -17,7 +17,15 @@ jobs:
         run: |
           echo "Logueandose..."
           docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
-      - name: Construyendo la imagen
-        run: docker build -t pedromm04/calculadora:latest . 
-      - name: Subiendo imagen
-        run: docker push pedromm04/calculadora:latest
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: pedromm04/calculadora:latest
