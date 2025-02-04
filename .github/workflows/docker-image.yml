@@ -12,7 +12,7 @@ jobs:
       - name: Instalar PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2-cli'
+          php-version: "8.2"
 
       - name: Instalar dependencias
         run: composer install 
