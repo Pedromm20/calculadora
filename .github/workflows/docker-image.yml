@@ -9,30 +9,24 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: php:8.2-cli
     steps:
       - name: Hacer checkout
         uses: actions/checkout@v4
 
-      - name: Instalar dependencias del sistema
-        run: |
-          apt-get update && apt-get install -y unzip libzip-dev
-          docker-php-ext-install zip
-
-      - name: Instalar Composer
-        run: |
-          curl -sS https://getcomposer.org/installer | php
-          mv composer.phar /usr/local/bin/composer
+      - name: Instalar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer, phpunit
 
       - name: Instalar dependencias
-        run: composer install --prefer-dist --no-progress --no-suggest --no-interaction
+        run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: Instalar PHPUnit
-        run: composer require --dev phpunit/phpunit
-        
+      - name: Listar archivos del proyecto
+        run: ls -la
+
       - name: Ejecutamos test
-        run: vendor/bin/phpunit --verbose --testdox || exit 1
+        run: vendor/bin/phpunit --testdox
 
   build:
     runs-on: ubuntu-latest
@@ -57,4 +51,6 @@ jobs:
         with:
           push: true
           platforms: linux/amd64,linux/arm64
+          file: Dockerfile
+          target: prod
           tags: pedromm04/calculadora:latest
