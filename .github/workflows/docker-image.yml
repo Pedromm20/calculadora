@@ -19,7 +19,7 @@ jobs:
         run: composer install 
 
       - name: Ejecutar tests
-        run: vendor/bin/phpunit --testdox
+        run: vendor/bin/phpunit --tests
 
   build:
     runs-on: ubuntu-latest
