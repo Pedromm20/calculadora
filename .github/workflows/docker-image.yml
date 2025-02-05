@@ -43,4 +43,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           file: Dockerfile
           target: prod
+          
           tags: pedromm04/calculadora:${{ github.ref_name }},pedromm04/calculadora:latest
